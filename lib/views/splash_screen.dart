@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:technical_task_app/utils/app_text/app_text.dart';
-import 'package:technical_task_app/utils/app_text_style.dart';
-import 'package:technical_task_app/utils/utils.dart';
+import 'package:technical_task_app/utils/app_text/app_text_style.dart';
 import 'package:technical_task_app/widgets/custom_appbar.dart';
 import 'package:technical_task_app/controller/splash_controller.dart';
 
@@ -13,7 +12,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = Utils.screenSize(context);
+    final screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: CustomAppbar("SplashScreen", true),
       body: Container(
@@ -21,17 +20,17 @@ class SplashScreen extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: size.height * .185,
+              top: screenSize.height * .185,
               child: Padding(
                 padding: const EdgeInsets.all(19),
                 child: SizedBox(
-                  width: size.width * .88,
-                  height: size.height * .323,
+                  width: screenSize.width * .88,
+                  height: screenSize.height * .323,
                   child: Column(
                     children: [
                       SizedBox(
-                        width: size.width * .32,
-                        height: size.height * .141,
+                        width: screenSize.width * .32,
+                        height: screenSize.height * .141,
                         child: Center(child: Image.asset("assets/car.png")),
                       ),
                       Expanded(
@@ -58,10 +57,10 @@ class SplashScreen extends StatelessWidget {
             ),
             // 🔁 Rotating Image
             Positioned(
-              top: size.height * 0.78,
-              left: size.width * 0.44,
-              width: size.width * 0.124,
-              height: size.height * 0.06,
+              top: screenSize.height * 0.78,
+              left: screenSize.width * 0.44,
+              width: screenSize.width * 0.124,
+              height: screenSize.height * 0.06,
               child: AnimatedBuilder(
                 animation: controller.rotationController,
                 builder: (_, child) {

@@ -1,74 +1,176 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:technical_task_app/utils/app_colord.dart';
+import 'package:technical_task_app/utils/app_text/app_text.dart';
+import 'package:technical_task_app/utils/app_text/app_text_style.dart';
 import 'package:technical_task_app/widgets/custom_appbar.dart';
+import 'package:technical_task_app/widgets/custom_button.dart';
+import 'package:technical_task_app/widgets/custom_text_container.dart';
 
-class Onboarding extends StatefulWidget {
-  const Onboarding({super.key});
+import '../controller/onboard_controller.dart';
 
-  @override
-  State<Onboarding> createState() => _OnboardingState();
-}
+class Onboarding extends StatelessWidget {
+  Onboarding({super.key});
 
-class _OnboardingState extends State<Onboarding> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
-
-  final List<String> _imagePaths = [
-    'assets/signal_image.png',
-    'assets/onboard_image2.png',
-  ];
-
-  void _onNextPressed() {
-    if (_currentPage < _imagePaths.length - 1) {
-      _pageController.nextPage(
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeIn,
-      );
-    } else {
-      // TODO: Navigate to next screen (e.g., home or login)
-      // Example: Get.off(() => const HomeScreen());
-    }
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
+  // Instantiate controller
+  final OnboardingController controller = Get.put(OnboardingController());
 
   @override
   Widget build(BuildContext context) {
+    final screenSize = MediaQuery.sizeOf(context);
     return Scaffold(
       appBar: CustomAppbar("Onboarding", true),
-      body: Column(
-        children: [
-          Expanded(
-            child: PageView.builder(
-              controller: _pageController,
-              itemCount: _imagePaths.length,
-              onPageChanged: (index) {
-                setState(() => _currentPage = index);
-              },
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Image.asset(
-                    _imagePaths[index],
-                    fit: BoxFit.contain,
+      body: Container(
+        color: AppColors.screenColors,
+        child: Container(
+          child: Stack(
+            children: [
+              Positioned(
+                left: screenSize.width * .095,
+                top: screenSize.height * .09,
+                width: screenSize.width * .82,
+                height: screenSize.height * .33,
+                child: Container(
+                  color: Colors.white,
+                  child: PageView.builder(
+                    controller: controller.pageController,
+                    itemCount: controller.images.length,
+                    onPageChanged: controller.onPageChanged,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          image: DecorationImage(
+                            image: AssetImage(controller.images[index]),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
+              ),
+              Positioned(
+                  top: screenSize.height * .51,
+                  width: screenSize.width,
+                  height: screenSize.height * .421,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: screenSize.height * .18,
+                          width: screenSize.width * .9,
+                          child: Obx(() =>
+                              CustomTextContainer(
+                                headText: controller.currentIndex.value !=
+                                    controller.images.length - 1 ? AppText
+                                    .textOnBoardBold : AppText
+                                    .textOnBoardBold2,
+                                titleText: controller.currentIndex.value !=
+                                    controller.images.length - 1
+                                    ? AppText.textOnBoardNormal
+                                    : AppText.textOnBoard2Normal,))
+                      ),
+                      SizedBox(height: 30,),
+                      Obx(() {
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: controller.images
+                              .asMap()
+                              .entries
+                              .map(
+                                (item) {
+                              return Container(
+                                height: 12,
+                                width: 12,
+                                margin: const EdgeInsets.all(4),
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: controller.currentIndex.value ==
+                                      item.key
+                                      ? Colors.blueAccent
+                                      : Colors.grey,
+                                ),
+                              );
+                            },
+                          ).toList(),
+                        );
+                      }),
+                      const SizedBox(height: 40),
+                      Obx(() {
+                        return CustomButton(
+                          label: controller.currentIndex.value !=
+                              controller.images.length - 1
+                              ? "Next"
+                              : "Get Started",
+                          width: screenSize.width * .88,
+                          borderRadius: 100,
+                          onPressed: controller.nextPage,
+                        );
+                      }),
+                    ],
+                  )),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 40),
-            child: ElevatedButton(
-              onPressed: _onNextPressed,
-              child: Text(_currentPage == _imagePaths.length - 1
-                  ? 'Get Started'
-                  : 'Next'),
-            ),
-          ),
-        ],
+        ),
+        // Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     SizedBox(
+        //       height: 250,
+        //       child: PageView.builder(
+        //         controller: controller.pageController,
+        //         itemCount: controller.images.length,
+        //         onPageChanged: controller.onPageChanged,
+        //         itemBuilder: (context, index) {
+        //           return Container(
+        //             margin: const EdgeInsets.all(5),
+        //             decoration: BoxDecoration(
+        //               borderRadius: BorderRadius.circular(15),
+        //               image: DecorationImage(
+        //                 image: AssetImage(controller.images[index]),
+        //                 fit: BoxFit.fill,
+        //               ),
+        //             ),
+        //           );
+        //         },
+        //       ),
+        //     ),
+        //     const SizedBox(height: 16),
+        //     Obx(() {
+        //       return Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: controller.images.asMap().entries.map(
+        //               (item) {
+        //             return Container(
+        //               height: 12,
+        //               width: 12,
+        //               margin: const EdgeInsets.all(4),
+        //               decoration: BoxDecoration(
+        //                 shape: BoxShape.circle,
+        //                 color: controller.currentIndex.value == item.key
+        //                     ? Colors.blueAccent
+        //                     : Colors.grey,
+        //               ),
+        //             );
+        //           },
+        //         ).toList(),
+        //       );
+        //     }),
+        //     const SizedBox(height: 16),
+        //     Obx(() {
+        //       return CustomButton(
+        //         label: controller.currentIndex.value !=
+        //             controller.images.length - 1
+        //             ? "Next"
+        //             : "Get Started",
+        //         width: screenSize.width * .88,
+        //         borderRadius: 100,
+        //         onPressed: controller.nextPage,
+        //       );
+        //     }),
+        //   ],
+        // ),
       ),
     );
   }
