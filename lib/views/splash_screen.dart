@@ -12,64 +12,68 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.sizeOf(context);
+    final screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: CustomAppbar("SplashScreen", true),
       body: Container(
+        width: double.infinity,
+        height: double.infinity,
         color: const Color(0xFFFFFFFF),
         child: Stack(
           children: [
+            // 🖼️ Car & Text Section
             Positioned(
-              top: screenSize.height * .185,
-              child: Padding(
-                padding: const EdgeInsets.all(19),
-                child: SizedBox(
-                  width: screenSize.width * .88,
-                  height: screenSize.height * .323,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        width: screenSize.width * .32,
-                        height: screenSize.height * .141,
-                        child: Center(child: Image.asset("assets/car.png")),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Text(
-                              AppText.text1Bold,
-                              style: AppTextStyle.textStyleFigTree700Bold,
-                            ),
-                            Expanded(
-                              child: Text(
-                                AppText.text2Normal,
-                                textAlign: TextAlign.center,
-                                style: AppTextStyle.textStyleInter400Regular,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+              top: screenSize.height * 0.18,
+              left: screenSize.width * 0.06,
+              right: screenSize.width * 0.06,
+              child: SizedBox(
+                width: screenSize.width * 0.88,
+                height: screenSize.height * 0.35,
+                child: Column(
+                  children: [
+                    // Car image
+                    SizedBox(
+                      width: screenSize.width * 0.32,
+                      height: screenSize.height * 0.14,
+                      child: Image.asset("assets/car.png"),
+                    ),
+                    SizedBox(height: screenSize.height * 0.02),
+
+                    // Texts
+                    Text(
+                      AppText.text1Bold,
+                      style: AppTextStyle.textStyleFigTree700Bold,
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: screenSize.height * 0.01),
+                    Text(
+                      AppText.text2Normal,
+                      style: AppTextStyle.textStyleInter400Regular,
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
               ),
             ),
-            // 🔁 Rotating Image
+
+            // 🔁 Rotating Loader Image
             Positioned(
               top: screenSize.height * 0.78,
               left: screenSize.width * 0.44,
-              width: screenSize.width * 0.124,
-              height: screenSize.height * 0.06,
-              child: AnimatedBuilder(
-                animation: controller.rotationController,
-                builder: (_, child) {
-                  return Transform.rotate(
-                    angle: controller.rotationController.value * 2 * 3.1416,
-                    child: child,
-                  );
-                },
-                child: Image.asset("assets/circular_dot.png"),
+              child: SizedBox(
+                width: screenSize.width * 0.12,
+                height: screenSize.width * 0.12,
+                child: AnimatedBuilder(
+                  animation: controller.rotationController,
+                  builder: (_, child) {
+                    return Transform.rotate(
+                      angle: controller.rotationController.value * 2 * 3.1416,
+                      child: child,
+                    );
+                  },
+                  child: Image.asset("assets/circular_dot.png"),
+                ),
               ),
             ),
           ],

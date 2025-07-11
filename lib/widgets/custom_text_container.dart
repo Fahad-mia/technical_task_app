@@ -1,41 +1,37 @@
 import 'package:flutter/material.dart';
 import '../utils/app_text/app_text_style.dart';
 
-class CustomTextContainer extends StatefulWidget {
+class CustomTextContainer extends StatelessWidget {
   final String headText;
   final String? titleText;
-   const CustomTextContainer({super.key, required this.headText, this.titleText});
 
-  @override
-  State<CustomTextContainer> createState() => _CustomTextContainerState();
-}
+  const CustomTextContainer({
+    super.key,
+    required this.headText,
+    this.titleText,
+  });
 
-class _CustomTextContainerState extends State<CustomTextContainer> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 15.0, right: 15),
-          child: Text(widget.headText,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center, // center horizontally
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text(
+            headText,
             textAlign: TextAlign.center,
             style: AppTextStyle.textStyleInter700Bold,
-
           ),
-        ),
-        Expanded(
-          child: Align(
-            alignment: Alignment.topLeft,
-            child: Text( widget.titleText != null ? widget.titleText! : "",
-
-              textAlign: TextAlign.center,
-              style: AppTextStyle.textStyleInter400OnBoardRegular,
-            ),
+          const SizedBox(height: 10),
+          Text(
+            titleText ?? '',
+            textAlign: TextAlign.center,
+            style: AppTextStyle.textStyleInter400OnBoardRegular,
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

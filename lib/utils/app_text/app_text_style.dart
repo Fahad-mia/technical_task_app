@@ -20,7 +20,7 @@ class AppTextStyle{
   );
   //----------onboard screen text-------
 static TextStyle textStyleInter700Bold = GoogleFonts.inter(
-  fontSize: 22,
+  fontSize: 24,
   height: 1.4,
   color: AppColors.textBoldColor,
   fontWeight: FontWeight.bold,

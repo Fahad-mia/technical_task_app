@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:technical_task_app/routes/app_routes.dart';
 import '../views/onboarding.dart'; // adjust path
 
 class SplashController extends GetxController with GetTickerProviderStateMixin {
@@ -20,7 +21,7 @@ class SplashController extends GetxController with GetTickerProviderStateMixin {
 
     // Timer for navigation
     Timer(const Duration(seconds: 3), () {
-      Get.off(() => Onboarding()); // navigate and remove splash from stack
+     Get.toNamed(AppRoutes.onboarding); // navigate and remove splash from stack
     });
   }
 
