@@ -1,0 +1,32 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../views/onboarding.dart'; // adjust path
+
+class SplashController extends GetxController with GetTickerProviderStateMixin {
+  late AnimationController rotationController;
+
+  @override
+  void onInit() {
+    super.onInit();
+
+    // Rotation animation
+    rotationController = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    )..repeat();
+
+    // Timer for navigation
+    Timer(const Duration(seconds: 3), () {
+      Get.off(() => Onboarding()); // navigate and remove splash from stack
+    });
+  }
+
+  @override
+  void onClose() {
+    rotationController.dispose();
+    super.onClose();
+  }
+}

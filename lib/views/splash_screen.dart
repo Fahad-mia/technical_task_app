@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:technical_task_app/utils/app_text/app_text.dart';
 import 'package:technical_task_app/utils/app_text_style.dart';
 import 'package:technical_task_app/utils/utils.dart';
 import 'package:technical_task_app/widgets/custom_appbar.dart';
+import 'package:technical_task_app/controller/splash_controller.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  SplashScreen({super.key});
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
+  final SplashController controller = Get.put(SplashController());
 
-class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final size = Utils.screenSize(context);
     return Scaffold(
       appBar: CustomAppbar("SplashScreen", true),
       body: Container(
-        color: Color(0xFFFFFFFF),
+        color: const Color(0xFFFFFFFF),
         child: Stack(
           children: [
             Positioned(
@@ -28,7 +27,6 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: SizedBox(
                   width: size.width * .88,
                   height: size.height * .323,
-
                   child: Column(
                     children: [
                       SizedBox(
@@ -37,23 +35,20 @@ class _SplashScreenState extends State<SplashScreen> {
                         child: Center(child: Image.asset("assets/car.png")),
                       ),
                       Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          child: Column(
-                            children: [
-                              Text(
-                                AppText.text1Bold,
-                                style: AppTextStyle.textStyleFigTree700Bold,
+                        child: Column(
+                          children: [
+                            Text(
+                              AppText.text1Bold,
+                              style: AppTextStyle.textStyleFigTree700Bold,
+                            ),
+                            Expanded(
+                              child: Text(
+                                AppText.text2Normal,
+                                textAlign: TextAlign.center,
+                                style: AppTextStyle.textStyleInter400Regular,
                               ),
-                              Expanded(
-                                child: Text(
-                                  AppText.text2Normal,
-                                  textAlign: TextAlign.center,
-                                  style: AppTextStyle.textStyleInter400Regular,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -61,12 +56,22 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ),
+            // 🔁 Rotating Image
             Positioned(
               top: size.height * 0.78,
               left: size.width * 0.44,
               width: size.width * 0.124,
               height: size.height * 0.06,
-              child: Container(child: Image.asset("assets/circular_dot.png")),
+              child: AnimatedBuilder(
+                animation: controller.rotationController,
+                builder: (_, child) {
+                  return Transform.rotate(
+                    angle: controller.rotationController.value * 2 * 3.1416,
+                    child: child,
+                  );
+                },
+                child: Image.asset("assets/circular_dot.png"),
+              ),
             ),
           ],
         ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:technical_task_app/views/splash_screen.dart';
+import 'package:get/get.dart';
+import 'package:technical_task_app/routes/app_pages.dart';
+import 'package:technical_task_app/routes/app_routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,14 +10,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
+      initialRoute: AppRoutes.splash,
+      getPages: AppPages.pages,
     );
   }
 }
-
