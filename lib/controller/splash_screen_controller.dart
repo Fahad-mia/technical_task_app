@@ -19,10 +19,11 @@ class SplashScreenController extends GetxController with GetTickerProviderStateM
       vsync: this,
     )..repeat();
 
-    // Timer for navigation
+
     Timer(const Duration(seconds: 3), () {
-     Get.toNamed(AppRoutes.onboarding); // navigate and remove splash from stack
+      Get.offAllNamed(AppRoutes.onboarding); // Completely remove splash from stack
     });
+
   }
 
   @override

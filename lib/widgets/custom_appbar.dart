@@ -28,8 +28,13 @@ AppBar CustomAppbar(
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.arrow_back_ios_new,
-                    size: screenWidth * 0.05, color: Colors.black),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Icon(Icons.arrow_back_ios_new,
+                        size: screenWidth * 0.05, color: Colors.black),
+                  ),
+                ),
               ],
             ),
           ),

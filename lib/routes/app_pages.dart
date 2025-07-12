@@ -19,7 +19,7 @@ class AppPages {
     GetPage(name: AppRoutes.forgotPass, page: () => ForgorPasswordScreen()),
     GetPage(name: AppRoutes.resetPass, page: () => ResetPasswordScreen()),
     GetPage(name: AppRoutes.verifyCode, page: () => VerifyCodeScreen()),
-    GetPage(name: AppRoutes.enableLocation, page: () => EnableLocationSceen()),
+    GetPage(name: AppRoutes.enableLocation, page: () => EnableLocationScreen()),
     GetPage(name: AppRoutes.selectLanguage, page: () => SelectLanguageScreen()),
   ];
 }

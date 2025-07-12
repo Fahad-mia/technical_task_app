@@ -29,39 +29,13 @@ class _SelectLanguageScreenState extends State<SelectLanguageScreen> {
     final screenSize = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Select Language"),
-        automaticallyImplyLeading: false,
-        // Hide default back button
-        backgroundColor: AppColors.screenColors,
-        elevation: 0,
-        leading: null,
-        actions: [],
-      ),
+      appBar: CustomAppbar("", true, showBackButton: true),
       body: Container(
         color: AppColors.screenColors,
         padding: EdgeInsets.symmetric(horizontal: screenSize.width * 0.05),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenSize.height * 0.04),
-
-            // Your custom back button here (could be at the top left)
-            GestureDetector(
-              onTap: () => Get.back(),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios_new,
-                    size: screenSize.width * 0.06,
-                    color: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: screenSize.height * 0.04),
 
             Text(
               AppText.motherLanguageHeading,
