@@ -6,6 +6,7 @@ class CustomTextEditingField extends StatefulWidget {
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool isPassword;
+  final TextStyle? labelStyle;
 
   const CustomTextEditingField({
     super.key,
@@ -14,6 +15,7 @@ class CustomTextEditingField extends StatefulWidget {
     required this.controller,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
+    this.labelStyle,
   });
 
   @override
@@ -37,13 +39,16 @@ class _CustomTextEditingFieldState extends State<CustomTextEditingField> {
         // Label
         Text(
           widget.label,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 14,
-          ),
+          style: widget.labelStyle ??
+              const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black,
+              ),
         ),
         const SizedBox(height: 6),
-        // Input
+
+        // Input Field
         TextField(
           controller: widget.controller,
           keyboardType: widget.keyboardType,

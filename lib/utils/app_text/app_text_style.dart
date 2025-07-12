@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../app_colord.dart';
 
-class AppTextStyle{
+abstract class AppTextStyle{
   static TextStyle textStyleFigTree700Bold = GoogleFonts.figtree(
     fontWeight: FontWeight.bold,
     color: AppColors.textBoldColor,
@@ -32,7 +32,22 @@ static TextStyle textStyleInter700Bold = GoogleFonts.inter(
       letterSpacing: 0.003,
       color: Color(0xFF636F85)
   );
+  //----------sign up screen------------
 
+  static TextStyle inputLabelTextStyle = GoogleFonts.inter(
+      fontWeight: FontWeight.bold,
+      fontSize: 14,
+      height: 1.6,
+      letterSpacing: 0.003,
+      color: Color(0xFF070707)
+  );
+static TextStyle checkBoxTextStyle = GoogleFonts.inter(
+      fontWeight: FontWeight.w500,
+      fontSize: 14,
+      height: 1.6,
+      letterSpacing: 0.003,
+      color: Color(0xFF64748B)
+  );
 
 
 }
