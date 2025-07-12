@@ -32,7 +32,7 @@ static TextStyle textStyleInter700Bold = GoogleFonts.inter(
       letterSpacing: 0.003,
       color: Color(0xFF636F85)
   );
-  //----------sign up screen------------
+  //----------sign In screen------------
 
   static TextStyle inputLabelTextStyle = GoogleFonts.inter(
       fontWeight: FontWeight.bold,
@@ -47,6 +47,14 @@ static TextStyle checkBoxTextStyle = GoogleFonts.inter(
       height: 1.6,
       letterSpacing: 0.003,
       color: Color(0xFF64748B)
+  );
+//----------Forgot Password----------
+  static TextStyle newPasswordTestStyle = GoogleFonts.inter(
+      fontWeight: FontWeight.w500,
+      fontSize: 14,
+      height: 1.6,
+      letterSpacing: 0.003,
+      color: Color(0xFF070707)
   );
 
 

@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:technical_task_app/routes/app_routes.dart';
-import '../views/onboarding.dart'; // adjust path
+import '../views/onboarding_screen.dart'; // adjust path
 
-class SplashController extends GetxController with GetTickerProviderStateMixin {
+class SplashScreenController extends GetxController with GetTickerProviderStateMixin {
   late AnimationController rotationController;
 
   @override

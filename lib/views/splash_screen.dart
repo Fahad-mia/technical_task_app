@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:technical_task_app/utils/app_text/app_text.dart';
 import 'package:technical_task_app/utils/app_text/app_text_style.dart';
 import 'package:technical_task_app/widgets/custom_appbar.dart';
-import 'package:technical_task_app/controller/splash_controller.dart';
+import 'package:technical_task_app/controller/splash_screen_controller.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
 
-  final SplashController controller = Get.put(SplashController());
+  final SplashScreenController controller = Get.put(SplashScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class SplashScreen extends StatelessWidget {
         color: const Color(0xFFFFFFFF),
         child: Stack(
           children: [
-            // 🖼️ Car & Text Section
+
             Positioned(
               top: screenSize.height * 0.18,
               left: screenSize.width * 0.06,
@@ -31,6 +31,7 @@ class SplashScreen extends StatelessWidget {
                 width: screenSize.width * 0.88,
                 height: screenSize.height * 0.35,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Car image
                     SizedBox(
@@ -57,7 +58,6 @@ class SplashScreen extends StatelessWidget {
               ),
             ),
 
-            // 🔁 Rotating Loader Image
             Positioned(
               top: screenSize.height * 0.78,
               left: screenSize.width * 0.44,

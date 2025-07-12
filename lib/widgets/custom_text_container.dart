@@ -4,11 +4,15 @@ import '../utils/app_text/app_text_style.dart';
 class CustomTextContainer extends StatelessWidget {
   final String headText;
   final String? titleText;
+  final CrossAxisAlignment? crossAxisAlignment;
+  final MainAxisAlignment? mainAxisAlignment;
 
   const CustomTextContainer({
     super.key,
     required this.headText,
     this.titleText,
+    this.crossAxisAlignment,
+    this.mainAxisAlignment
   });
 
   @override
@@ -16,8 +20,12 @@ class CustomTextContainer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center, // center horizontally
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: crossAxisAlignment != null
+            ? crossAxisAlignment!
+            : CrossAxisAlignment.center, // center horizontally
+        mainAxisAlignment: mainAxisAlignment !=null
+            ? mainAxisAlignment!
+            : MainAxisAlignment.start,
         children: [
           Text(
             headText,

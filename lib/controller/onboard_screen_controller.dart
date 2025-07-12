@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class OnboardingController extends GetxController {
+class OnboardingScreenController extends GetxController {
   final PageController pageController = PageController();
   final images = [
     'assets/signal_image.png',

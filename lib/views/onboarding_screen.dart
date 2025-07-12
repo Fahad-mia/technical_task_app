@@ -7,12 +7,12 @@ import 'package:technical_task_app/widgets/custom_appbar.dart';
 import 'package:technical_task_app/widgets/custom_button.dart';
 import 'package:technical_task_app/widgets/custom_text_container.dart';
 
-import '../controller/onboard_controller.dart';
+import '../controller/onboard_screen_controller.dart';
 
-class Onboarding extends StatelessWidget {
-  Onboarding({super.key});
+class OnboardingScreen extends StatelessWidget {
+  OnboardingScreen({super.key});
 
-  final OnboardingController controller = Get.put(OnboardingController());
+  final OnboardingScreenController controller = Get.put(OnboardingScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +29,8 @@ class Onboarding extends StatelessWidget {
               // Image Slider Box
               Container(
                 width: double.infinity,
-                height: screenSize.height * 0.33,
+                height: screenSize.height * 0.4,
                 decoration: BoxDecoration(
-                  color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: PageView.builder(
@@ -107,7 +106,7 @@ class Onboarding extends StatelessWidget {
                   onPressed: controller.currentIndex.value !=
                       controller.images.length - 1
                       ? controller.nextPage
-                      : () => Get.toNamed(AppRoutes.signup),
+                      : () => Get.toNamed(AppRoutes.signIn),
                 );
               }),
 

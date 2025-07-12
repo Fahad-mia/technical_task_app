@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 class CustomTextEditingField extends StatefulWidget {
   final String label;
   final String hintText;
+  final bool isTextVisible;
   final TextEditingController controller;
   final TextInputType keyboardType;
   final bool isPassword;
   final TextStyle? labelStyle;
+  final Function(String)? onChanged; // ✅ NEW
 
   const CustomTextEditingField({
     super.key,
     required this.label,
     required this.hintText,
     required this.controller,
+    required this.isTextVisible,
     this.keyboardType = TextInputType.text,
     this.isPassword = false,
     this.labelStyle,
+    this.onChanged, // ✅ NEW
   });
 
   @override
@@ -36,7 +40,6 @@ class _CustomTextEditingFieldState extends State<CustomTextEditingField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Label
         Text(
           widget.label,
           style: widget.labelStyle ??
@@ -47,12 +50,11 @@ class _CustomTextEditingFieldState extends State<CustomTextEditingField> {
               ),
         ),
         const SizedBox(height: 6),
-
-        // Input Field
         TextField(
           controller: widget.controller,
           keyboardType: widget.keyboardType,
-          obscureText: widget.isPassword ? _obscureText : false,
+          obscureText: widget.isPassword || !widget.isTextVisible ? _obscureText : false,
+          onChanged: widget.onChanged, // ✅ Attach handler here
           decoration: InputDecoration(
             hintText: widget.hintText,
             contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 20),
